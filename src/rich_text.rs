@@ -35,42 +35,42 @@ pub enum Mention {
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Page {
-    id: String,
+    pub id: String,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Database {
-    id: String,
+    pub id: String,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MentionDate {
-    start: DateTime<FixedOffset>,
-    end: DateTime<FixedOffset>,
+    pub start: DateTime<FixedOffset>,
+    pub end: DateTime<FixedOffset>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Equation {
-    expression: String,
+    pub expression: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Text {
-    content: String,
-    link: Option<Link>,
+    pub content: String,
+    pub link: Option<Link>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Link {
-    r#type: String,
-    url: String,
+    pub r#type: String,
+    pub url: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Annotations {
-    bold: bool,
-    italic: bool,
-    strikethrough: bool,
-    underline: bool,
-    code: bool,
-    color: RichTextColor,
+    pub bold: bool,
+    pub italic: bool,
+    pub strikethrough: bool,
+    pub underline: bool,
+    pub code: bool,
+    pub color: RichTextColor,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

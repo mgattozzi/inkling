@@ -308,7 +308,7 @@ pub enum NotionObject {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct List {
-    results: Vec<NotionObject>,
-    next_cursor: String,
-    has_more: bool,
+    pub results: Vec<NotionObject>,
+    pub next_cursor: String,
+    pub has_more: bool,
 }

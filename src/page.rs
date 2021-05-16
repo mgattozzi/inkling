@@ -5,12 +5,12 @@ use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageObject {
-    id: String,
-    created_time: DateTime<FixedOffset>,
-    last_edited_time: DateTime<FixedOffset>,
-    archived: bool,
-    parent: Parent,
-    properties: HashMap<String, PageProperty>,
+    pub id: String,
+    pub created_time: DateTime<FixedOffset>,
+    pub last_edited_time: DateTime<FixedOffset>,
+    pub archived: bool,
+    pub parent: Parent,
+    pub properties: HashMap<String, PageProperty>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -106,12 +106,12 @@ pub enum PageProperty {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageFileReference {
-    name: String,
+    pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageDate {
-    start: DateTime<FixedOffset>,
-    end: DateTime<FixedOffset>,
+    pub start: DateTime<FixedOffset>,
+    pub end: DateTime<FixedOffset>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -126,7 +126,7 @@ pub enum PageFormula {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageRelation {
-    id: String,
+    pub id: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -203,15 +203,15 @@ pub enum PageRollupProperty {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageSelectOptions {
-    name: String,
-    id: String,
-    color: PageColor,
+    pub name: String,
+    pub id: String,
+    pub color: PageColor,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageMultiSelectOptions {
-    name: String,
-    id: String,
-    color: PageColor,
+    pub name: String,
+    pub id: String,
+    pub color: PageColor,
 }
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]

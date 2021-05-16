@@ -22,9 +22,9 @@ pub enum UserObject {
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Person {
-    email: String,
+    pub email: String,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Bot {
-    bot: Option<HashMap<(), ()>>,
+    pub bot: Option<HashMap<(), ()>>,
 }

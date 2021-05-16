@@ -3,9 +3,9 @@ use std::{error, fmt};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ErrorObject {
-    status: u16,
-    code: ErrorCode,
-    message: String,
+    pub status: u16,
+    pub code: ErrorCode,
+    pub message: String,
 }
 impl fmt::Display for ErrorObject {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

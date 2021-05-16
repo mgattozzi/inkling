@@ -5,11 +5,11 @@ use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DatabaseObject {
-    id: String,
-    created_time: DateTime<FixedOffset>,
-    last_edited_time: DateTime<FixedOffset>,
-    properties: HashMap<String, DatabaseProperty>,
-    title: Vec<RichTextObject>,
+    pub id: String,
+    pub created_time: DateTime<FixedOffset>,
+    pub last_edited_time: DateTime<FixedOffset>,
+    pub properties: HashMap<String, DatabaseProperty>,
+    pub title: Vec<RichTextObject>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -93,7 +93,7 @@ pub enum DatabaseProperty {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Number {
-    format: NumberFormat,
+    pub format: NumberFormat,
 }
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]
@@ -112,23 +112,23 @@ pub enum NumberFormat {
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Select {
-    options: Vec<SelectOptions>,
+    pub options: Vec<SelectOptions>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SelectOptions {
-    name: String,
-    id: String,
-    color: DatabaseColor,
+    pub name: String,
+    pub id: String,
+    pub color: DatabaseColor,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MultiSelect {
-    options: Vec<MultiSelectOptions>,
+    pub options: Vec<MultiSelectOptions>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MultiSelectOptions {
-    name: String,
-    id: String,
-    color: DatabaseColor,
+    pub name: String,
+    pub id: String,
+    pub color: DatabaseColor,
 }
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]
@@ -146,21 +146,21 @@ pub enum DatabaseColor {
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Expression {
-    expression: String,
+    pub expression: String,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Relation {
-    database_id: String,
-    synced_property_name: Option<String>,
-    synced_property_id: Option<String>,
+    pub database_id: String,
+    pub synced_property_name: Option<String>,
+    pub synced_property_id: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Rollup {
-    relation_property_name: String,
-    relation_property_id: String,
-    rollup_property_name: String,
-    rollup_property_id: String,
-    function: Function,
+    pub relation_property_name: String,
+    pub relation_property_id: String,
+    pub rollup_property_name: String,
+    pub rollup_property_id: String,
+    pub function: Function,
 }
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "snake_case")]
@@ -264,103 +264,103 @@ pub enum QueryDatabaseFilter {
 
 #[derive(Serialize, Debug)]
 pub struct TextFilter {
-    equals: Option<String>,
-    does_not_equal: Option<String>,
-    contains: Option<String>,
-    does_not_contain: Option<String>,
-    starts_with: Option<String>,
-    ends_with: Option<String>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
+    pub equals: Option<String>,
+    pub does_not_equal: Option<String>,
+    pub contains: Option<String>,
+    pub does_not_contain: Option<String>,
+    pub starts_with: Option<String>,
+    pub ends_with: Option<String>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct NumberFilter {
-    equals: Option<String>,
-    does_not_equal: Option<String>,
-    greater_than: Option<String>,
-    less_than: Option<String>,
-    greater_than_or_equal_to: Option<String>,
-    less_than_or_equal_to: Option<String>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
+    pub equals: Option<String>,
+    pub does_not_equal: Option<String>,
+    pub greater_than: Option<String>,
+    pub less_than: Option<String>,
+    pub greater_than_or_equal_to: Option<String>,
+    pub less_than_or_equal_to: Option<String>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
 }
 #[derive(Serialize, Debug)]
 pub struct CheckBoxFilter {
-    equals: Option<String>,
-    does_not_equal: Option<String>,
+    pub equals: Option<String>,
+    pub does_not_equal: Option<String>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct SelectFilter {
-    equals: Option<String>,
-    does_not_equal: Option<String>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
+    pub equals: Option<String>,
+    pub does_not_equal: Option<String>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct MultiSelectFilter {
-    contains: Option<String>,
-    does_not_contain: Option<String>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
+    pub contains: Option<String>,
+    pub does_not_contain: Option<String>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct DateFilter {
-    equals: Option<DateTime<FixedOffset>>,
-    before: Option<DateTime<FixedOffset>>,
-    after: Option<DateTime<FixedOffset>>,
-    on_or_before: Option<DateTime<FixedOffset>>,
-    on_or_after: Option<DateTime<FixedOffset>>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
-    past_week: Option<HashMap<(), ()>>,
-    past_month: Option<HashMap<(), ()>>,
-    past_year: Option<HashMap<(), ()>>,
-    next_week: Option<HashMap<(), ()>>,
-    next_month: Option<HashMap<(), ()>>,
-    next_year: Option<HashMap<(), ()>>,
+    pub equals: Option<DateTime<FixedOffset>>,
+    pub before: Option<DateTime<FixedOffset>>,
+    pub after: Option<DateTime<FixedOffset>>,
+    pub on_or_before: Option<DateTime<FixedOffset>>,
+    pub on_or_after: Option<DateTime<FixedOffset>>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
+    pub past_week: Option<HashMap<(), ()>>,
+    pub past_month: Option<HashMap<(), ()>>,
+    pub past_year: Option<HashMap<(), ()>>,
+    pub next_week: Option<HashMap<(), ()>>,
+    pub next_month: Option<HashMap<(), ()>>,
+    pub next_year: Option<HashMap<(), ()>>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct PersonFilter {
-    contains: Option<String>,
-    does_not_contain: Option<String>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
+    pub contains: Option<String>,
+    pub does_not_contain: Option<String>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct FilesFilter {
-    contains: Option<String>,
-    does_not_contain: Option<String>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
+    pub contains: Option<String>,
+    pub does_not_contain: Option<String>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct RelationFilter {
-    contains: Option<String>,
-    does_not_contain: Option<String>,
-    is_empty: Option<bool>,
-    is_not_empty: Option<bool>,
+    pub contains: Option<String>,
+    pub does_not_contain: Option<String>,
+    pub is_empty: Option<bool>,
+    pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct FormulaFilter {
-    text: Option<TextFilter>,
-    checkbox: Option<CheckBoxFilter>,
-    number: Option<NumberFilter>,
-    date: Option<DateFilter>,
+    pub text: Option<TextFilter>,
+    pub checkbox: Option<CheckBoxFilter>,
+    pub number: Option<NumberFilter>,
+    pub date: Option<DateFilter>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct QueryDatabaseSort {
-    property: Option<String>,
-    timestamp: Option<QueryDatabaseTime>,
-    direction: Option<Direction>,
+    pub property: Option<String>,
+    pub timestamp: Option<QueryDatabaseTime>,
+    pub direction: Option<Direction>,
 }
 
 #[derive(Serialize, Debug)]

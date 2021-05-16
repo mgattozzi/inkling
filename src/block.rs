@@ -81,45 +81,45 @@ pub enum BlockObject {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Paragraph {
-    text: Vec<RichTextObject>,
-    children: Vec<BlockObject>,
+    pub text: Vec<RichTextObject>,
+    pub children: Vec<BlockObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Heading1 {
-    text: Vec<RichTextObject>,
+    pub text: Vec<RichTextObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Heading2 {
-    text: Vec<RichTextObject>,
+    pub text: Vec<RichTextObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Heading3 {
-    text: Vec<RichTextObject>,
+    pub text: Vec<RichTextObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BulletedListItem {
-    text: Vec<RichTextObject>,
-    children: Vec<BlockObject>,
+    pub text: Vec<RichTextObject>,
+    pub children: Vec<BlockObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct NumberedListItem {
-    text: Vec<RichTextObject>,
-    children: Vec<BlockObject>,
+    pub text: Vec<RichTextObject>,
+    pub children: Vec<BlockObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ToDo {
-    text: Vec<RichTextObject>,
-    checked: Option<bool>,
-    children: Vec<BlockObject>,
+    pub text: Vec<RichTextObject>,
+    pub checked: Option<bool>,
+    pub children: Vec<BlockObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Toggle {
-    text: Vec<RichTextObject>,
-    children: Vec<BlockObject>,
+    pub text: Vec<RichTextObject>,
+    pub children: Vec<BlockObject>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ChildPage {
-    title: String,
+    pub title: String,
 }
 
 #[derive(Serialize, Debug)]

@@ -2,14 +2,14 @@ use serde::Serialize;
 
 #[derive(Serialize, Debug)]
 pub struct SearchFilter {
-    value: Option<String>,
-    property: Option<String>,
+    pub value: Option<String>,
+    pub property: Option<String>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct SearchSort {
-    direction: Option<Direction>,
-    timestamp: Option<SearchTime>,
+    pub direction: Option<Direction>,
+    pub timestamp: Option<SearchTime>,
 }
 
 #[derive(Serialize, Debug)]
