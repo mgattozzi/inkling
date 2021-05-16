@@ -1,0 +1,16 @@
+[package]
+name = "inkling"
+version = "0.1.0-2020-05-13"
+authors = ["Michael Gattozzi <mgattozzi@gmail.com>"]
+edition = "2018"
+description = "Bindings for the Notion API"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+async-trait = "0.1.50"
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+chrono = { version = "0.4", features = ["serde"] }
