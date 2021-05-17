@@ -4,6 +4,7 @@ pub mod error;
 pub mod page;
 pub mod rich_text;
 pub mod search;
+pub mod time;
 pub mod user;
 
 use self::{
@@ -56,6 +57,7 @@ impl Client {
         self.get(BASE_URL.to_string() + "databases/" + id)
     }
 
+    /// Currently broken on Notion's end and will return only an empty list as of 05-17-2021
     pub fn list_databases(
         &self,
         start_cursor: Option<String>,
@@ -159,11 +161,11 @@ impl Client {
     pub fn append_block_children(
         &self,
         id: &str,
-        children: Vec<BlockObject>,
+        children: Vec<BlockObjectInput>,
     ) -> impl Future<Output = Result<NotionObject, Box<dyn Error>>> + '_ {
         #[derive(Serialize)]
         struct BlockChildren {
-            children: Vec<BlockObject>,
+            children: Vec<BlockObjectInput>,
         }
 
         let id_str = id.to_string();
@@ -309,6 +311,6 @@ pub enum NotionObject {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct List {
     pub results: Vec<NotionObject>,
-    pub next_cursor: String,
+    pub next_cursor: Option<String>,
     pub has_more: bool,
 }

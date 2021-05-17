@@ -1,13 +1,12 @@
-use crate::{rich_text::RichTextObject, user::UserObject};
-use chrono::{DateTime, FixedOffset};
+use crate::{rich_text::RichTextObject, time::Time, user::UserObject};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageObject {
     pub id: String,
-    pub created_time: DateTime<FixedOffset>,
-    pub last_edited_time: DateTime<FixedOffset>,
+    pub created_time: Time,
+    pub last_edited_time: Time,
     pub archived: bool,
     pub parent: Parent,
     pub properties: HashMap<String, PageProperty>,
@@ -88,7 +87,7 @@ pub enum PageProperty {
     },
     CreatedTime {
         id: String,
-        created_time: DateTime<FixedOffset>,
+        created_time: Time,
     },
     CreatedBy {
         id: String,
@@ -96,7 +95,7 @@ pub enum PageProperty {
     },
     LastEditedTime {
         id: String,
-        last_edited_time: DateTime<FixedOffset>,
+        last_edited_time: Time,
     },
     LastEditedBy {
         id: String,
@@ -110,18 +109,30 @@ pub struct PageFileReference {
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PageDate {
-    pub start: DateTime<FixedOffset>,
-    pub end: DateTime<FixedOffset>,
+    pub start: Time,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub end: Option<Time>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "type")]
 #[serde(rename_all = "snake_case")]
 pub enum PageFormula {
-    String { string: Option<String> },
-    Number { number: Option<f64> },
-    Boolean { boolean: Option<bool> },
-    Date { date: DateTime<FixedOffset> },
+    String {
+        #[serde(skip_serializing_if = "Option::is_none")]
+        string: Option<String>,
+    },
+    Number {
+        #[serde(skip_serializing_if = "Option::is_none")]
+        number: Option<f64>,
+    },
+    Boolean {
+        #[serde(skip_serializing_if = "Option::is_none")]
+        boolean: Option<bool>,
+    },
+    Date {
+        date: Time,
+    },
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -133,9 +144,16 @@ pub struct PageRelation {
 #[serde(tag = "type")]
 #[serde(rename_all = "snake_case")]
 pub enum PageRollup {
-    Number { number: Option<f64> },
-    Date { date: DateTime<FixedOffset> },
-    Array { array: Vec<PageRollupProperty> },
+    Number {
+        #[serde(skip_serializing_if = "Option::is_none")]
+        number: Option<f64>,
+    },
+    Date {
+        date: Time,
+    },
+    Array {
+        array: Vec<PageRollupProperty>,
+    },
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -188,13 +206,13 @@ pub enum PageRollupProperty {
         phone_number: String,
     },
     CreatedTime {
-        created_time: DateTime<FixedOffset>,
+        created_time: Time,
     },
     CreatedBy {
         created_by: UserObject,
     },
     LastEditedTime {
-        last_edited_time: DateTime<FixedOffset>,
+        last_edited_time: Time,
     },
     LastEditedBy {
         last_edited_by: UserObject,
@@ -276,13 +294,13 @@ pub enum PagePropertyValue {
         phone_number: String,
     },
     CreatedTime {
-        created_time: DateTime<FixedOffset>,
+        created_time: Time,
     },
     CreatedBy {
         created_by: UserObject,
     },
     LastEditedTime {
-        last_edited_time: DateTime<FixedOffset>,
+        last_edited_time: Time,
     },
     LastEditedBy {
         last_edited_by: UserObject,

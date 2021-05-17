@@ -1,13 +1,12 @@
-use crate::rich_text::RichTextObject;
-use chrono::{DateTime, FixedOffset};
+use crate::{rich_text::RichTextObject, time::Time};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DatabaseObject {
     pub id: String,
-    pub created_time: DateTime<FixedOffset>,
-    pub last_edited_time: DateTime<FixedOffset>,
+    pub created_time: Time,
+    pub last_edited_time: Time,
     pub properties: HashMap<String, DatabaseProperty>,
     pub title: Vec<RichTextObject>,
 }
@@ -151,7 +150,9 @@ pub struct Expression {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Relation {
     pub database_id: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub synced_property_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub synced_property_id: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug)]
@@ -264,102 +265,160 @@ pub enum QueryDatabaseFilter {
 
 #[derive(Serialize, Debug)]
 pub struct TextFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub equals: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_equal: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub contains: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_contain: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub starts_with: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ends_with: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct NumberFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub equals: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_equal: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub greater_than: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub less_than: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub greater_than_or_equal_to: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub less_than_or_equal_to: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
 }
 #[derive(Serialize, Debug)]
 pub struct CheckBoxFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub equals: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_equal: Option<String>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct SelectFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub equals: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_equal: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct MultiSelectFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub contains: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_contain: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct DateFilter {
-    pub equals: Option<DateTime<FixedOffset>>,
-    pub before: Option<DateTime<FixedOffset>>,
-    pub after: Option<DateTime<FixedOffset>>,
-    pub on_or_before: Option<DateTime<FixedOffset>>,
-    pub on_or_after: Option<DateTime<FixedOffset>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub equals: Option<Time>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub before: Option<Time>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub after: Option<Time>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub on_or_before: Option<Time>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub on_or_after: Option<Time>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub past_week: Option<HashMap<(), ()>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub past_month: Option<HashMap<(), ()>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub past_year: Option<HashMap<(), ()>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub next_week: Option<HashMap<(), ()>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub next_month: Option<HashMap<(), ()>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub next_year: Option<HashMap<(), ()>>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct PersonFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub contains: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_contain: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct FilesFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub contains: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_contain: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct RelationFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub contains: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub does_not_contain: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_empty: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_not_empty: Option<bool>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct FormulaFilter {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub text: Option<TextFilter>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub checkbox: Option<CheckBoxFilter>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub number: Option<NumberFilter>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub date: Option<DateFilter>,
 }
 
 #[derive(Serialize, Debug)]
 pub struct QueryDatabaseSort {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub property: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub timestamp: Option<QueryDatabaseTime>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub direction: Option<Direction>,
 }
 

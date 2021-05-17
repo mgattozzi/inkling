@@ -1,5 +1,4 @@
-use crate::rich_text::RichTextObject;
-use chrono::{DateTime, FixedOffset};
+use crate::{rich_text::RichTextObject, time::Time};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -7,74 +6,68 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "snake_case")]
 pub enum BlockObject {
     Paragraph {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         paragraph: Paragraph,
     },
+    #[serde(rename = "heading_1")]
     Heading1 {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         heading_1: Heading1,
     },
+    #[serde(rename = "heading_2")]
     Heading2 {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         heading_2: Heading2,
     },
+    #[serde(rename = "heading_3")]
     Heading3 {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         heading_3: Heading3,
     },
     BulletedListItem {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         bulleted_list_item: BulletedListItem,
     },
     ToDo {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         to_do: ToDo,
     },
     Toggle {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         toggle: Toggle,
     },
     ChildPage {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
         child_page: ChildPage,
     },
     Unsupported {
-        object: String,
         id: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
+        created_time: Time,
+        last_edited_time: Time,
         has_children: bool,
     },
 }
@@ -82,7 +75,8 @@ pub enum BlockObject {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Paragraph {
     pub text: Vec<RichTextObject>,
-    pub children: Vec<BlockObject>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub children: Option<Vec<BlockObject>>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Heading1 {
@@ -99,23 +93,28 @@ pub struct Heading3 {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BulletedListItem {
     pub text: Vec<RichTextObject>,
-    pub children: Vec<BlockObject>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub children: Option<Vec<BlockObject>>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct NumberedListItem {
     pub text: Vec<RichTextObject>,
-    pub children: Vec<BlockObject>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub children: Option<Vec<BlockObject>>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ToDo {
     pub text: Vec<RichTextObject>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub checked: Option<bool>,
-    pub children: Vec<BlockObject>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub children: Option<Vec<BlockObject>>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Toggle {
     pub text: Vec<RichTextObject>,
-    pub children: Vec<BlockObject>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub children: Option<Vec<BlockObject>>,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ChildPage {
@@ -128,58 +127,37 @@ pub struct ChildPage {
 pub enum BlockObjectInput {
     Paragraph {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         paragraph: Paragraph,
     },
+    #[serde(rename = "heading_1")]
     Heading1 {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         heading_1: Heading1,
     },
+    #[serde(rename = "heading_2")]
     Heading2 {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         heading_2: Heading2,
     },
+    #[serde(rename = "heading_3")]
     Heading3 {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         heading_3: Heading3,
     },
     BulletedListItem {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         bulleted_list_item: BulletedListItem,
     },
     ToDo {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         to_do: ToDo,
     },
     Toggle {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         toggle: Toggle,
     },
     ChildPage {
         object: String,
-        created_time: DateTime<FixedOffset>,
-        last_edited_time: DateTime<FixedOffset>,
-        has_children: bool,
         child_page: ChildPage,
     },
 }

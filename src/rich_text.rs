@@ -1,5 +1,4 @@
-use crate::user::UserObject;
-use chrono::{DateTime, FixedOffset};
+use crate::{time::Time, user::UserObject};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -8,18 +7,21 @@ use serde::{Deserialize, Serialize};
 pub enum RichTextObject {
     Text {
         plain_text: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
         href: Option<String>,
         annotations: Annotations,
         text: Text,
     },
     Mention {
         plain_text: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
         href: Option<String>,
         annotations: Annotations,
         mention: Mention,
     },
     Equation {
         plain_text: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
         href: Option<String>,
         annotations: Annotations,
         equation: Equation,
@@ -43,8 +45,8 @@ pub struct Database {
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MentionDate {
-    pub start: DateTime<FixedOffset>,
-    pub end: DateTime<FixedOffset>,
+    pub start: Time,
+    pub end: Time,
 }
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Equation {
@@ -54,6 +56,7 @@ pub struct Equation {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Text {
     pub content: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub link: Option<Link>,
 }
 

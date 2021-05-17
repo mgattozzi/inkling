@@ -6,14 +6,12 @@ use std::collections::HashMap;
 #[serde(rename_all = "snake_case")]
 pub enum UserObject {
     Person {
-        object: String,
         id: String,
         name: Option<String>,
         avatar_url: Option<String>,
         person: Person,
     },
     Bot {
-        object: String,
         id: String,
         name: Option<String>,
         avatar_url: Option<String>,
